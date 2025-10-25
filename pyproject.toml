@@ -19,3 +19,8 @@ signalflow = [
 dev = [
   'pytest>=8.4.2'
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.2",
+]
