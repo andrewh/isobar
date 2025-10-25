@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - Internal: Improved clock precision using `perf_counter` deadline scheduling loop to reduce tick jitter and eliminate alternating late/compressed intervals observed in tests.
+- Docs: CONTRIBUTING updated with explicit import style (no wildcards) and clock timing expectations (upper jitter tolerance widened to 4 ms).
 - Packaging: Moved test dependency `pytest` into `dev` optional extra to keep runtime installation lean.
 - Docs: Added musical overview page and development install instructions including note on disabling JACK in `python-rtmidi` build.
 
