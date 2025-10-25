@@ -53,6 +53,23 @@ timeline.run()
 
 ## Installation
 
+### Runtime vs development
+
+Base installation (runtime only): `pip install isobar`
+Development (editable, with tests): `pip install -e .[dev]`
+With optional SignalFlow backend: `pip install 'isobar[signalflow]'` or editable: `pip install -e '.[signalflow]'`
+Using uv (runtime): `uv pip install isobar`; development: `uv pip install -e .[dev]`
+
+`dev` extra currently provides test dependencies only.
+
+### python-rtmidi JACK note
+
+`python-rtmidi` may attempt to build JACK support on systems without JACK headers, causing build warnings or failures.
+If you do not require JACK, set environment variable `RTMIDI_OPTIONS="-Djack=false"` before installation to disable JACK backend.
+Example: `RTMIDI_OPTIONS="-Djack=false" pip install isobar`
+
+SignalFlow support is optional. Base installation provides MIDI/OSC/MIDI file features.
+
 SignalFlow support is optional. Base installation provides MIDI/OSC/MIDI file features.
 Install with SignalFlow: `pip install 'isobar[signalflow]'` or for editable development: `pip install -e '.[signalflow]'`.
 If using uv: `uv pip install -e .[signalflow]`. Without the extra, any attempts to use `SignalFlowOutputDevice` will raise an error.
