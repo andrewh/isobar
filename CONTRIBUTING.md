@@ -8,6 +8,23 @@ To run a style check with flake8:
 flake8 isobar
 ```
 
+### Import style
+
+Avoid wildcard imports (`from isobar import *`). Always import only the symbols you use. This improves readability, clarifies provenance, and helps static analysis. Example:
+
+```
+from isobar import Pattern, Timeline, Note
+```
+
+If you need many related pattern classes, prefer importing the module and qualifying, rather than a large explicit list:
+
+```
+from isobar import pattern
+scale = pattern.Scale([...])
+```
+
+Do not introduce wildcard imports in new examples, tests, or library code.
+
 ## Testing
 
 To run unit tests:
@@ -27,6 +44,16 @@ To automatically run unit tests on commit:
 ```
 echo pytest > .git/hooks/pre-commit
 ```
+
+### Clock timing expectations
+
+Timing tests use `time.perf_counter()` for higher resolution. The internal clock aims for low jitter but typical macOS / CPython scheduling can occasionally exceed 2 ms. Current test tolerance allows upper jitter ≤ 4 ms while asserting that average intervals remain close to target. When proposing precision improvements:
+
+- Provide reproducible measurements (script or test) using `perf_counter()`.
+- Avoid OS-specific real-time APIs unless strictly required by a demonstrated musical use case.
+- Keep changes minimal and focused; justify any increase in complexity with clear data.
+
+Sub‑2 ms guarantees are deferred until a concrete requirement emerges; discuss first before implementing platform-specific paths.
 
 ## Documentation
 
