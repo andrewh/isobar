@@ -6,7 +6,11 @@
 # Apply first-order Markov chains to an input MIDI file.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.midifile.input import MidiFileInputDevice
+from isobar.pattern.markov import MarkovLearner
+from isobar.pattern.core import PDict
+from isobar.pattern.scalar import PInt, PRound, PScalar
+from isobar.timelines.timeline import Timeline
 import argparse
 import logging
 

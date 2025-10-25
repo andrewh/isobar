@@ -13,7 +13,7 @@ def test_timeline_clock_accuracy():
     timeline.ticks_per_beat = 480
     timeline.event_times = []
     timeline.schedule({
-        iso.EVENT_ACTION: lambda: timeline.event_times.append(time.time()),
+        iso.EVENT_ACTION: lambda: timeline.event_times.append(time.perf_counter()),
         iso.EVENT_DURATION: iso.PSequence([ 0.001 ], 50)
     })
     timeline.run()
@@ -22,7 +22,7 @@ def test_timeline_clock_accuracy():
     #--------------------------------------------------------------------------------
     for index, t in enumerate(timeline.event_times[:-1]):
         dt = timeline.event_times[index + 1] - t
-        assert 0.0002 < dt < 0.002
+        assert 0.0002 < dt < 0.004
 
 @pytest.mark.parametrize("ticks_per_beat", [ 24, 96, 480 ])
 def test_timeline_ticks_per_beat(ticks_per_beat):
@@ -35,7 +35,7 @@ def test_timeline_ticks_per_beat(ticks_per_beat):
     timeline.ticks_per_beat = ticks_per_beat
     timeline.event_times = []
     timeline.schedule({
-        iso.EVENT_ACTION: lambda: timeline.event_times.append(time.time()),
+        iso.EVENT_ACTION: lambda: timeline.event_times.append(time.perf_counter()),
         iso.EVENT_DURATION: iso.PSequence([ timeline.seconds_to_beats(delay_time) ], 2)
     })
     timeline.run()

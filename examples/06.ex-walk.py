@@ -6,7 +6,11 @@
 # Brownian walk around a scale.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.scale import Scale
+from isobar.pattern.chance import PBrown
+from isobar.pattern.sequence import PSequence
+from isobar.pattern.tonal import PDegree
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

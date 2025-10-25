@@ -8,7 +8,8 @@
 # moving in and out of phase with one another.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.pattern.sequence import PSequence
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

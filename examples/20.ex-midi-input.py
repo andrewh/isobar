@@ -6,7 +6,9 @@
 # Press ctrl-c to stop listening, and the system will replay the input.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.midi import MidiInputDevice
+from isobar.pattern.sequence import PSequence
+from isobar.timelines.timeline import Timeline
 import logging
 import time
 

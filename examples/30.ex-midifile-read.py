@@ -6,7 +6,8 @@
 # Example of reading from a MIDI file in real time.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.midifile.input import MidiFileInputDevice
+from isobar.timelines.timeline import Timeline
 import argparse
 import logging
 

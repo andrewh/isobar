@@ -6,7 +6,8 @@
 # The MidiInputDevice object estimates the input tempo via a moving average.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.midi import MidiInputDevice
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

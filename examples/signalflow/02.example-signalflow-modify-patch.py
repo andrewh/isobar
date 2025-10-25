@@ -9,8 +9,10 @@
 # Each event updates the inputs of the Squelch patch with new values.
 #--------------------------------------------------------------------------------
 
-from isobar import *
-from signalflow import *
+from isobar.io.signalflow import SignalFlowOutputDevice
+from isobar.timelines.timeline import Timeline
+from isobar.pattern.chance import PChoice, PWhite
+from signalflow import Patch, SquareOscillator, SVFilter, AudioGraph
 
 class Squelch (Patch):
     def __init__(self, cutoff: float = 110, resonance: float = 0.8):

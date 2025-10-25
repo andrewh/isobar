@@ -4,7 +4,11 @@
 # isobar: ex-subsequence
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.scale import Scale
+from isobar.pattern.chance import PBrown, PWhite, PChoice
+from isobar.pattern.sequence import PSubsequence, PPermut, PReset, PImpulse, PSequence, PStutter
+from isobar.pattern.tonal import PDegree
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

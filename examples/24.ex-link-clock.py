@@ -17,7 +17,11 @@
 # Thanks to Raphaël Forment for providing LinkPython-extern.
 #------------------------------------------------------------------------
 
-from isobar import *
+import random
+from isobar.key import Key
+from isobar.pattern.sequence import PLoop, PSubsequence
+from isobar.pattern.chance import PWhite, PChoice
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

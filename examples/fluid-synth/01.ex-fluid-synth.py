@@ -7,7 +7,12 @@
 # https://www.fluidsynth.org/
 #------------------------------------------------------------------------
 
-from isobar import *
+import random
+from isobar.key import Key
+from isobar.pattern.sequence import PLoop, PSubsequence
+from isobar.pattern.chance import PWhite, PChoice
+from isobar.timelines.timeline import Timeline
+from isobar.io.fluidsynth import FluidSynthOutputDevice
 from isobar.io.fluidsynth import FluidSynthOutputDevice
 import logging
 import argparse

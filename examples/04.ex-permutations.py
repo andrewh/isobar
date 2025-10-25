@@ -9,7 +9,11 @@
 # Use simple permutations to generate intertwining musical structures.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.pattern.chance import PShuffle
+from isobar.pattern.sequence import PPermut
+from isobar.pattern.tonal import PDegree
+from isobar.key import Key
+from isobar.timelines.timeline import Timeline
 import random
 import logging
 

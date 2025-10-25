@@ -9,7 +9,9 @@
 #    that are statistically similar to the input.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.midi import MidiInputDevice, MidiOutputDevice
+from isobar.pattern.markov import MarkovParallelLearners
+from isobar.timelines.timeline import Timeline
 import logging
 import time
 

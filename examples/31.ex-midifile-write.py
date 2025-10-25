@@ -6,7 +6,12 @@
 # Simple example of writing to a MIDI file in real time.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.key import Key
+from isobar.io.midifile.output import MidiFileOutputDevice
+from isobar.pattern.tonal import PDegree
+from isobar.pattern.sequence import PSequence
+from isobar.timelines.timeline import Timeline
+from isobar.constants import MAX_CLOCK_RATE
 import logging
 
 def main():

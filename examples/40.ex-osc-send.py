@@ -6,7 +6,10 @@
 # Send OSC messages with a specified pattern.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.osc.output import OSCOutputDevice
+from isobar.pattern.sequence import PSequence
+from isobar.timelines.timeline import Timeline
+import logging
 
 def main():
     osc_device = OSCOutputDevice("127.0.0.1", 8010)

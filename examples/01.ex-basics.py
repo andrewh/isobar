@@ -7,7 +7,11 @@
 # sequences, scales, stochastic functions, scheduling and mapping.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.pattern.sequence import PSeries, PPingPong, PLoop, PSequence, PStutter
+from isobar.pattern.chance import PBrown
+from isobar.pattern.tonal import PDegree
+from isobar.scale import Scale
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

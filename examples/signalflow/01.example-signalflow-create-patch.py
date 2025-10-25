@@ -9,8 +9,11 @@
 # Setting the auto_free property frees the patch after it finishes.
 #--------------------------------------------------------------------------------
 
-from isobar import *
-from signalflow import *
+from isobar.io.signalflow import SignalFlowOutputDevice
+from isobar.pattern.chance import PChoice
+from isobar.timelines.timeline import Timeline
+from signalflow import Patch, ASREnvelope, SineOscillator, StereoPanner
+# Removed wildcard signalflow import
 
 class Ping (Patch):
     def __init__(self, frequency: float = 440):

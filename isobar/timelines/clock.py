@@ -102,31 +102,40 @@ class Clock (BaseClockSource):
         self.thread.start()
 
     def run(self):
-        # High-precision scheduling loop using a target timestamp to minimise drift.
+        # High-precision scheduling loop using target timestamps to minimise drift.
         start = time.perf_counter() * self.accelerate
         next_tick_time = start + self.tick_duration_seconds
         self.running = True
+        max_slice = 0.0005  # Maximum sleep slice (0.5ms)
+        spin_threshold = 0.00015  # Begin busy-wait within last 150us
         while self.running:
             now = time.perf_counter() * self.accelerate
-            # Handle late scheduling and accumulate missed ticks.
+            # Catch up if we fell behind (process missed ticks without compounding drift).
             while now >= next_tick_time and self.running:
                 ticks = next(self.clock_multiplier)
                 for _ in range(ticks):
                     self.clock_target.tick()
-                # Reset tick duration and apply any warpers.
                 self.tick_duration_seconds = self.tick_duration_seconds_orig
                 for warper in self.warpers:
                     warp = pow(2, next(warper))
                     self.tick_duration_seconds *= warp
                 next_tick_time += self.tick_duration_seconds
                 now = time.perf_counter() * self.accelerate
-            # Sleep most of the remaining time (if any) leaving a short busy-wait tail.
             remaining = next_tick_time - now
-            if remaining > 0.0004:
-                time.sleep(remaining - 0.0002)
-            elif remaining > 0.00005:
-                time.sleep(remaining * 0.5)
-            # Busy-wait for very short intervals (<50us) to improve precision.
+            if remaining <= 0:
+                # Late; loop will process catch-up ticks immediately next iteration.
+                continue
+            # Sleep in coarse slices leaving a short spin window.
+            while remaining > spin_threshold and self.running:
+                slice_sleep = min(remaining - spin_threshold, max_slice)
+                if slice_sleep > 0:
+                    time.sleep(slice_sleep)
+                now = time.perf_counter() * self.accelerate
+                remaining = next_tick_time - now
+            # Busy-wait for final microseconds for precision.
+            while remaining > 0 and self.running:
+                now = time.perf_counter() * self.accelerate
+                remaining = next_tick_time - now
 
     def stop(self):
         self.running = False

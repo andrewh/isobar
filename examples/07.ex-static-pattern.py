@@ -7,7 +7,12 @@
 # in other patterns.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.key import Key
+from isobar.pattern.static import PStaticPattern
+from isobar.pattern.sequence import PSequence
+from isobar.pattern.chance import PWhite
+from isobar.pattern.sequence import PCreep
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

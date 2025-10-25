@@ -7,7 +7,8 @@
 # Make sure you have a MIDI device connected.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.pattern.sequence import PRange
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

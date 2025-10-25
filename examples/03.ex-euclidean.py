@@ -6,7 +6,8 @@
 # Uses Euclidean rhythms to generate multiple polyrhythmic voices.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.pattern.sequence import PEuclidean
+from isobar.timelines.timeline import Timeline
 
 import logging
 

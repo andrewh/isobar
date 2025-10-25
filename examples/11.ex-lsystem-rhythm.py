@@ -7,7 +7,11 @@
 # sending output over MIDI.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.pattern.lsystem import PLSystem
+from isobar.pattern.core import PAbs
+from isobar.pattern.scalar import PDiff
+from isobar.pattern.chance import PWhite
+from isobar.timelines.timeline import Timeline
 import logging
 
 def main():

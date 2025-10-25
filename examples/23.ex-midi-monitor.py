@@ -6,7 +6,7 @@
 # messages are received.
 #------------------------------------------------------------------------
 
-from isobar import *
+from isobar.io.midi import MidiInputDevice
 import logging
 import time
 

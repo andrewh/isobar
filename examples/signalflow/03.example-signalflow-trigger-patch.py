@@ -9,8 +9,11 @@
 # Each event triggers the patch, causing its ASREnvelope to be re-triggered.
 #--------------------------------------------------------------------------------
 
-from isobar import *
-from signalflow import *
+from isobar.io.signalflow import SignalFlowOutputDevice
+from isobar.timelines.timeline import Timeline
+from isobar.pattern.static import PLoop
+from isobar.pattern.oscillator import PTri
+from signalflow import Patch, WhiteNoise, SVFilter, ASREnvelope
 
 class Cymbal (Patch):
     def __init__(self):
