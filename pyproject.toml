@@ -16,3 +16,6 @@ dependencies = [
 signalflow = [
   'signalflow @ git+https://github.com/ideoforms/signalflow.git'
 ]
+dev = [
+  'pytest>=8.4.2'
+]
