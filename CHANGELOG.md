@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+- Internal: Improved clock precision using `perf_counter` deadline scheduling loop to reduce tick jitter and eliminate alternating late/compressed intervals observed in tests.
+- Packaging: Moved test dependency `pytest` into `dev` optional extra to keep runtime installation lean.
+- Docs: Added musical overview page and development install instructions including note on disabling JACK in `python-rtmidi` build.
+
+
 ## [v0.2.1](https://github.com/ideoforms/isobar/tree/v0.2.1) (2025-08-08)
 
 - Added support for treating generator expressions in place of patterns
