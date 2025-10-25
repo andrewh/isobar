@@ -61,7 +61,7 @@ class GlobalsSyncClient:
             if isinstance(value, str):
                 try:
                     value = eval(value)
-                except Exception as e:
+                except Exception:
                     pass
 
             # don't call Globals.set() to avoid circular callback triggers
@@ -79,6 +79,6 @@ if __name__ == "__main__":
         value = input()
         try:
             value = eval(value)
-        except:
+        except Exception:
             pass
         Globals.set("value", value)

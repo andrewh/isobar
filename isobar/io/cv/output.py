@@ -1,6 +1,10 @@
 from ..output import OutputDevice
 
 def get_cv_output_devices():
+    try:
+        import sounddevice
+    except ModuleNotFoundError:
+        raise RuntimeError("CVOutputDevice: sounddevice module not installed (pip install sounddevice)")
     return list(sounddevice.query_devices())
 
 class CVOutputDevice(OutputDevice):

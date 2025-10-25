@@ -222,7 +222,7 @@ def parse_class_data():
         cmatch = re.search(class_regex, contents, re.S)
 
         # Loop through for each class in the file
-        while cmatch != None:
+        while cmatch is not None:
             name = re.search('(?<=class\s)[^(:]+', cmatch.group(), re.S).group()
             desc = re.search('(?<=""")((?!""").)*', cmatch.group(), re.S).group().strip()
             # Format whitespace for easier output
@@ -260,11 +260,11 @@ def parse_class_data():
                     # Remove the first line stating it is the argument
                     arguments = arguments.split("\n")[1:]
                     i = 0
-                    for l in arguments:
+                    for arg_line in arguments:
                         # Format a code block around the name of the arg
-                        l = "`%s" % l.strip()
-                        l = re.sub(":", "`:", l, 1)
-                        arguments[i] = l
+                        arg_line = "`%s" % arg_line.strip()
+                        arg_line = re.sub(":", "`:", arg_line, 1)
+                        arguments[i] = arg_line
                         i += 1
                     arguments = "\n\n".join(arguments)
 

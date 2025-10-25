@@ -37,7 +37,7 @@ class NetworkGlobalsReceiver:
         value = args[1]
         try:
             Globals.set(key, pickle.loads(value))
-        except:
+        except Exception:
             Globals.set(key, value)
 
 if __name__ == "__main__":

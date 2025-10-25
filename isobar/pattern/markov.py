@@ -45,7 +45,7 @@ class PMarkov(PStochasticPattern):
         self.reset()
 
     def __repr__(self):
-        return ("PMarkov(%s)" % repr(nodes))
+        return ("PMarkov(%s)" % repr(self.nodes))
 
     def randomize(self):
         """ Uses the existing set of nodes but randomizes their connections. """
@@ -158,7 +158,8 @@ class MarkovGrapher:
         # first pass: add nodes
         #------------------------------------------------------------------------
         if name_map:
-            _name_map = lambda value: str(name_map(value))
+            def _name_map(value):
+                return str(name_map(value))
         else:
             _name_map = str
 
