@@ -102,45 +102,31 @@ class Clock (BaseClockSource):
         self.thread.start()
 
     def run(self):
-        clock0 = clock1 = time.time() * self.accelerate
-        #------------------------------------------------------------------------
-        # Allow a tick to elapse before we call tick() for the first time
-        # to keep Warp patterns in sync
-        #------------------------------------------------------------------------
+        # High-precision scheduling loop using a target timestamp to minimise drift.
+        start = time.perf_counter() * self.accelerate
+        next_tick_time = start + self.tick_duration_seconds
         self.running = True
         while self.running:
-            if clock1 - clock0 >= (2.0 * self.tick_duration_seconds):
-                delay_time = (clock1 - clock0 - self.tick_duration_seconds * 2)
-                if delay_time > MIN_CLOCK_DELAY_WARNING_TIME:
-                    logger.info("Clock: Timer overflowed (late by %.3fs)" % delay_time)
-
-            next_tick_duration = self.tick_duration_seconds
-            if self.jitter > 0:
-                next_tick_jitter = self.tick_duration_seconds * random.uniform(0, self.jitter)
-                next_tick_duration += next_tick_jitter
-            while clock1 - clock0 >= next_tick_duration:
-                #------------------------------------------------------------------------
-                # Time for a tick.
-                # Use while() because multiple ticks might need to be processed if the
-                # clock has overflowed.
-                #------------------------------------------------------------------------
+            now = time.perf_counter() * self.accelerate
+            # Handle late scheduling and accumulate missed ticks.
+            while now >= next_tick_time and self.running:
                 ticks = next(self.clock_multiplier)
                 for _ in range(ticks):
                     self.clock_target.tick()
-
-                clock0 += self.tick_duration_seconds
+                # Reset tick duration and apply any warpers.
                 self.tick_duration_seconds = self.tick_duration_seconds_orig
                 for warper in self.warpers:
-                    warp = next(warper)
-                    #------------------------------------------------------------------------
-                    # map [-1..1] to [0.5, 2]
-                    #  - so -1 doubles the tempo, +1 halves it
-                    #------------------------------------------------------------------------
-                    warp = pow(2, warp)
+                    warp = pow(2, next(warper))
                     self.tick_duration_seconds *= warp
-
-            time.sleep(0.0001)
-            clock1 = time.time() * self.accelerate
+                next_tick_time += self.tick_duration_seconds
+                now = time.perf_counter() * self.accelerate
+            # Sleep most of the remaining time (if any) leaving a short busy-wait tail.
+            remaining = next_tick_time - now
+            if remaining > 0.0004:
+                time.sleep(remaining - 0.0002)
+            elif remaining > 0.00005:
+                time.sleep(remaining * 0.5)
+            # Busy-wait for very short intervals (<50us) to improve precision.
 
     def stop(self):
         self.running = False
