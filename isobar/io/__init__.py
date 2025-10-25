@@ -6,7 +6,11 @@ from .mpe import MPEOutputDevice
 from .osc import OSCOutputDevice
 from .cv import CVOutputDevice, get_cv_output_devices
 from .socketio import SocketIOOutputDevice
-from .signalflow import SignalFlowOutputDevice
+try:
+    from .signalflow import SignalFlowOutputDevice
+except Exception:
+    # SignalFlow optional
+    SignalFlowOutputDevice = None
 from .midinote import MidiNote
 from .supercollider import SuperColliderOutputDevice
 

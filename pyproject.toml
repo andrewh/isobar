@@ -1,0 +1,18 @@
+[project]
+name = "isobar"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  'python-osc',
+  'mido',
+  'python-rtmidi',
+  'LinkPython-extern',
+  'numpy',
+]
+
+[project.optional-dependencies]
+signalflow = [
+  'signalflow @ git+https://github.com/ideoforms/signalflow.git'
+]

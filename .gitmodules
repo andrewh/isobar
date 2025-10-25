@@ -1,0 +1,3 @@
+[submodule "external/signalflow"]
+	path = external/signalflow
+	url = https://github.com/ideoforms/signalflow.git

@@ -53,6 +53,10 @@ timeline.run()
 
 ## Installation
 
+SignalFlow support is optional. Base installation provides MIDI/OSC/MIDI file features.
+Install with SignalFlow: `pip install 'isobar[signalflow]'` or for editable development: `pip install -e '.[signalflow]'`.
+If using uv: `uv pip install -e .[signalflow]`. Without the extra, any attempts to use `SignalFlowOutputDevice` will raise an error.
+
 The short answer: `pip3 install isobar`
 
 The long answer: [isobar Getting Started guide](http://ideoforms.github.io/isobar/getting-started/)
