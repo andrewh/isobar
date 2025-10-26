@@ -53,28 +53,34 @@ timeline.run()
 
 ## Installation
 
-### Runtime vs development
+### Using uv (recommended)
 
-Base installation (runtime only): `pip install isobar`
-Development (editable, with tests): `pip install -e .[dev]`
-With optional SignalFlow backend: `pip install 'isobar[signalflow]'` or editable: `pip install -e '.[signalflow]'`
-Using uv (runtime): `uv pip install isobar`; development: `uv pip install -e .[dev]`
+Create virtual environment:
+`uv venv`
 
-`dev` extra currently provides test dependencies only.
+Install runtime dependencies:
+`uv sync`
+
+Install with development tools (tests + lint):
+`uv sync --group dev`
+
+Install optional SignalFlow backend:
+`uv sync --extra signalflow`
+(Combine with dev group if needed: `uv sync --group dev --extra signalflow`)
+
+### Legacy pip (still works but discouraged)
+Runtime only: `pip install isobar`
+With SignalFlow: `pip install 'isobar[signalflow]'`
 
 ### python-rtmidi JACK note
 
 `python-rtmidi` may attempt to build JACK support on systems without JACK headers, causing build warnings or failures.
 If you do not require JACK, set environment variable `RTMIDI_OPTIONS="-Djack=false"` before installation to disable JACK backend.
-Example: `RTMIDI_OPTIONS="-Djack=false" pip install isobar`
+Examples:
+`RTMIDI_OPTIONS="-Djack=false" uv sync`
+`RTMIDI_OPTIONS="-Djack=false" pip install isobar`
 
-SignalFlow support is optional. Base installation provides MIDI/OSC/MIDI file features.
-
-SignalFlow support is optional. Base installation provides MIDI/OSC/MIDI file features.
-Install with SignalFlow: `pip install 'isobar[signalflow]'` or for editable development: `pip install -e '.[signalflow]'`.
-If using uv: `uv pip install -e .[signalflow]`. Without the extra, any attempts to use `SignalFlowOutputDevice` will raise an error.
-
-The short answer: `pip3 install isobar`
+SignalFlow is optional. Without the extra, attempts to use `SignalFlowOutputDevice` will raise an error.
 
 The long answer: [isobar Getting Started guide](http://ideoforms.github.io/isobar/getting-started/)
 

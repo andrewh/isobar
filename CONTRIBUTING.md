@@ -30,7 +30,7 @@ Do not introduce wildcard imports in new examples, tests, or library code.
 To run unit tests:
 
 ```
-python3 setup.py test
+uv run pytest
 ```
 
 To generate a unit test coverage report:
@@ -60,8 +60,8 @@ Sub‑2 ms guarantees are deferred until a concrete requirement emerges; discuss
 To generate and serve the docs:
 
 ```
-pip3 install mkdocs mkdocs-material
-mkdocs serve
+uv add mkdocs mkdocs-material
+uv run mkdocs serve
 ```
 
 To deploy docs to GitHub:
@@ -72,15 +72,15 @@ mkdocs gh-deploy
 To regenerate the per-class pattern docs for the pattern library docs and README:
 
 ```
-auxiliary/scripts/generate-docs.py -m > docs/patterns/library.md
-auxiliary/scripts/generate-docs.py
+uv run auxiliary/scripts/generate-docs.py -m > docs/patterns/library.md
+uv run auxiliary/scripts/generate-docs.py
 ```
 
 ## Distribution
 
 To push to PyPi:
 
-* increment version in `setup.py`
+* increment version in `pyproject.toml`
 * `git tag vx.y.z`, `git push --tags`, and create GitHub release
-* `python3 setup.py sdist`
-* `twine upload dist/isobar-x.y.z.tar.gz`
+* Build distribution: `uv build`
+* Upload: `uv publish` (or `twine upload dist/*` if you prefer twine)

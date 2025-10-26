@@ -21,7 +21,7 @@ wheels = [
 
 [[package]]
 name = "isobar"
-version = "0.1.0"
+version = "0.2.1"
 source = { virtual = "." }
 dependencies = [
     { name = "linkpython-extern" },
@@ -32,15 +32,13 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
-dev = [
-    { name = "pytest" },
-]
 signalflow = [
     { name = "signalflow" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "pytest" },
     { name = "ruff" },
 ]
 
@@ -49,14 +47,16 @@ requires-dist = [
     { name = "linkpython-extern" },
     { name = "mido" },
     { name = "numpy" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.2" },
     { name = "python-osc" },
     { name = "python-rtmidi" },
     { name = "signalflow", marker = "extra == 'signalflow'", git = "https://github.com/ideoforms/signalflow.git" },
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "ruff", specifier = ">=0.14.2" }]
+dev = [
+    { name = "pytest", specifier = ">=8.4.2" },
+    { name = "ruff", specifier = ">=0.14.2" },
+]
 
 [[package]]
 name = "linkpython-extern"
