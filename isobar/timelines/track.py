@@ -234,7 +234,12 @@ class Track:
                         self.current_event = self.get_next_event()
                         if self.current_event is None:
                             raise StopIteration
-                        self.next_event_time += float(self.current_event.duration)
+                        event_duration_beats = float(self.current_event.duration)
+                        if event_duration_beats < self.tick_duration:
+                            # Enforce minimum scheduling granularity of one tick. Durations shorter than a tick
+                            # are rounded up to avoid multiple events firing within a single tick interval.
+                            event_duration_beats = self.tick_duration
+                        self.next_event_time += event_duration_beats
 
                     #--------------------------------------------------------------------------------
                     # Perform the event.
@@ -288,7 +293,7 @@ class Track:
                         #--------------------------------------------------------------------------------
                         if key == EVENT_TYPE or key == EVENT_DURATION:
                             continue
-                        if type(value) is not float and type(value) is not int:
+                        if not isinstance(value, (float, int)):
                             continue
                         interpolating_event_fields[key] = PInterpolate(PSequence([self.current_event.fields[key],
                                                                                 self.next_event.fields[key]], 1),

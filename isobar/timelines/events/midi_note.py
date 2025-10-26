@@ -107,7 +107,7 @@ class MidiNoteEvent(MidiEvent):
         # note_on: Standard (MIDI) type of device
         # If the amplitude is None or 0, this is a rest.
         #----------------------------------------------------------------------
-        if type(self.amplitude) is tuple or (self.amplitude is not None and self.amplitude > 0):
+        if isinstance(self.amplitude, tuple) or (self.amplitude is not None and self.amplitude > 0):
             notes = self.note if hasattr(self.note, '__iter__') else [self.note]
 
             #----------------------------------------------------------------------

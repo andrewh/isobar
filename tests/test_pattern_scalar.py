@@ -60,7 +60,7 @@ def test_pround():
     a = iso.PSequence([0, 0.1, 0.5, 1, 1.5, None, -3.9], 1)
     b = iso.PRound(a)
     assert list(b) == [0, 0, 0, 1, 2, None, -4]
-    assert all(x is None or type(x) == int for x in list(b))
+    assert all(x is None or isinstance(x, int) for x in list(b))
 
     a = iso.PSequence([42, 59, 0.5, -7.1, None, 1001], 1)
     b = iso.PRound(a, -1)

@@ -97,7 +97,7 @@ class PFadeNotewise(PFade):
                 self.fadeindex = 0
                 self.fade_out()
 
-        if type(self.notes[self.counter]) == dict:
+        if isinstance(self.notes[self.counter], dict):
             if self.on[self.counter]:
                 rv = self.notes[self.counter]
             else:

@@ -44,12 +44,12 @@ def test_util_frequency_to_midi_note():
     npt.assert_almost_equal(frequency_to_midi_note(440), 69)
     npt.assert_allclose(frequency_to_midi_note([440, 261.6255653005986, -1], omit_invalid_frequencies=True), [69, 60])
     assert frequency_to_midi_note([-1, -2], omit_invalid_frequencies=False) == [None, None]
-    assert type(frequency_to_midi_note([440, 880])) == list
-    assert type(frequency_to_midi_note(np.array([440, 880]))) == np.ndarray
+    assert isinstance(frequency_to_midi_note([440, 880]), list)
+    assert isinstance(frequency_to_midi_note(np.array([440, 880])), np.ndarray)
 
 def test_util_midi_note_to_frequency():
     npt.assert_almost_equal(midi_note_to_frequency(60), 261.6255653005986)
     npt.assert_almost_equal(midi_note_to_frequency(69), 440)
     assert midi_note_to_frequency([None, None]) == [None, None]
-    assert type(midi_note_to_frequency([69, 60])) == list
-    assert type(midi_note_to_frequency(np.array([69, 60]))) == np.ndarray
+    assert isinstance(midi_note_to_frequency([69, 60]), list)
+    assert isinstance(midi_note_to_frequency(np.array([69, 60])), np.ndarray)

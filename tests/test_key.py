@@ -90,4 +90,4 @@ def test_key_random():
     assert a.tonic >= 0 and a.tonic < 12
     assert len(a.semitones) > 0
     assert len(a.semitones) <= 12
-    assert all(type(n) is int for n in a.semitones)
+    assert all(isinstance(n, int) for n in a.semitones)

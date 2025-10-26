@@ -29,7 +29,7 @@ class SignalFlowEvent(Event):
         if EVENT_TYPE in event_values:
             self.type = event_values[EVENT_TYPE]
         else:
-            if type(self.patch).__name__ == "PatchSpec" or isinstance(self.patch, type):
+            if self.patch.__class__.__name__ == "PatchSpec" or isinstance(self.patch, type):
                 self.type = EVENT_TYPE_PATCH_CREATE
             else:
                 if hasattr(self.patch, "trigger_node") and self.patch.trigger_node is not None:

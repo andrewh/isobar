@@ -9,7 +9,7 @@ class Key:
     """
 
     def __init__(self, tonic=0, scale=Scale.major):
-        if type(tonic) == str:
+        if isinstance(tonic, str):
             #--------------------------------------------------------------------------------
             # Constructor specifies a note name and a scale name (e.g, "C# minor")
             # TODO unit test for this
@@ -20,7 +20,7 @@ class Key:
                 scale = Scale.byname(scale_str)
             else:
                 tonic = note_name_to_midi_note(tonic)
-        if type(scale) == str:
+        if isinstance(scale, str):
             scale = Scale.byname(scale)
 
         self.tonic = tonic

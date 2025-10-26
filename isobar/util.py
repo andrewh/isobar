@@ -88,7 +88,7 @@ def midi_note_to_note_name(note: float) -> str:
     Maps a MIDI note index to a note name.
     Supports fractional pitches.
     """
-    if (type(note) is not int and type(note) is not float) or (note < 0 or note > 127):
+    if (not isinstance(note, (int, float))) or (note < 0 or note > 127):
         raise InvalidMIDIPitch()
 
     degree = int(note) % len(note_names)
